@@ -10,9 +10,10 @@ with open('naive_bayes_plus_pop_1.0.0.pkl', 'rb') as fid:
     modelo_plus_pop = pickle.load(fid)
 
 lyric = st.text_area('Escribe')
+btn = st.button('Predecir')
 
-modelo = option = st.sidebar.selectbox('Selecciona un modelo:',tuple([i for i in os.listdir(os.getcwd()) if i.endswith('.pkl')]))
-if lyric:
+modelo = st.sidebar.selectbox('Selecciona un modelo:',tuple([i for i in os.listdir(os.getcwd()) if i.endswith('.pkl')]))
+if lyric and btn:
     prediccion = ''.join(modelo.predict([lyric])).capitalize() if modelo == 'Naive Bayes' else ''.join(modelo_plus_pop.predict([lyric])).capitalize()
     st.write('Sentiment:', prediccion)
 
